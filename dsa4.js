@@ -134,5 +134,56 @@ function largestSum(arr){
     return sum;
 }
 
-console.log(largestSum([1,2,-9,3,-2,5]))
+// console.log(largestSum([1,2,-9,3,-2,5]))
 
+
+var findDuplicate = function(nums) {
+
+  var set = new Set()
+  for(let i=0;i<nums.length;i++){
+    if(set.has(nums[i])){
+      return nums[i]
+    } 
+    else{
+      set.add(nums[i])
+    }   
+  }
+  return -1;
+    
+};
+
+
+// console.log(findDuplicate([1,3,4,2,2]))
+
+function maxSubarraySum(arr){
+  let curr = 0
+  let sum = 0;
+
+  for(let i=0;i<arr.length;i++){
+    curr = Math.max(arr[i],arr[i]+curr)
+    sum = Math.max(sum, curr)
+  }
+  return curr;
+}
+// console.log(maxSubarraySum([1,2,3,-2,5,-9]))
+
+
+var merge = function(intervals) {
+  var arr = [intervals[0]]
+    for(let i=1;i<intervals.length;i++){
+      if(intervals[i][0]<arr[arr.length-1][0]){
+        arr[arr.length-1][0] = intervals[i][0]
+      }
+      if(intervals[i][0]<=arr[arr.length-1][1] && intervals[i][1]>arr[arr.length-1][1]){
+        
+        arr[arr.length-1][1] = intervals[i][1]
+      }
+      else if(intervals[i][0]>arr[arr.length-1][1]&& intervals[i][1]>arr[arr.length-1][1]){
+        
+      arr.push(intervals[i])
+      }
+    }
+    return arr;
+};
+
+console.log(merge([[1,4],[0,0]]))
