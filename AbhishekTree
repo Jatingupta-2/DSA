@@ -1,0 +1,121 @@
+class TreeNode
+{
+  constructor(value)
+  {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function preorder(root)
+{
+  if(root !== null)
+  {
+    process.stdout.write(root.value.toString() + ' ');
+    preorder(root.left);
+    preorder(root.right);
+  }
+}
+
+function postorder(root)
+{
+  if(root !== null)
+  {
+    postorder(root.left);
+    postorder(root.right);
+    process.stdout.write(root.value.toString() + ' ');
+  }
+}
+
+function inorder(root)
+{
+  if(root !== null)
+  {
+    inorder(root.left);
+    process.stdout.write(root.value.toString() + ' ');
+    inorder(root.right);
+  }
+}
+
+function calculateHeight(root)
+{
+  if(root === null)
+  {
+    return 0;
+  }
+
+  let leftHeight = calculateHeight(root.left);
+  let rightHeight = calculateHeight(root.right);
+
+  if(leftHeight > rightHeight)
+    return leftHeight + 1;
+  else
+    return rightHeight + 1;
+}
+
+function mirrorTree(root)
+{
+  if(root === null)
+    return null;
+
+  let leftTree = mirrorTree(root.left);
+  let rightTree = mirrorTree(root.right);
+
+  root.left = rightTree;
+  root.right = leftTree;
+
+  return root;
+}
+
+function levelorder(root)
+{
+  let queue = [];
+  queue.push(root);
+  while(queue.length !== 0)
+  {
+    let node = queue.shift();
+    process.stdout.write(node.value.toString() + ' ');
+    if(node.left)
+      queue.push(node.left);
+    if(node.right)
+      queue.push(node.right);
+  }
+}
+
+function insertIntoTree(i, arr)
+{
+  let curr = null;
+  if(i < arr.length)
+  {
+    curr = new TreeNode(arr[i]);
+    curr.left = insertIntoTree(2*i + 1, arr);
+    curr.right = insertIntoTree(2*i + 2, arr);
+  }
+  return curr;
+}
+
+function createTree(arr)
+{
+  return insertIntoTree(0, arr);
+}
+
+let arr = [5,3,6,2,4];
+let root = createTree(arr);
+// preorder(root);
+// console.log();
+// postorder(root);
+// console.log();
+// inorder(root);
+// console.log();
+// levelorder(root);
+
+//console.log(calculateHeight(root));
+
+inorder(root);
+root = mirrorTree(root);
+console.log();
+inorder(root);
+root = mirrorTree(root);
+console.log();
+inorder(root);

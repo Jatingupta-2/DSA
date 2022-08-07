@@ -198,8 +198,8 @@ function reverseKGroup(head, k) {
   let curr = head;
   let kVal = k;
   while (--kVal) {
-    curr = curr.next;
     if (curr.next == null) return head;
+    curr = curr.next;
   }
   let after = curr.next;
   curr.next = null;
@@ -243,21 +243,21 @@ function findLength(head) {
 function findMeetingPoint(head1, head2) {
   let lengtHead1 = findLength(head1);
   let lengtHead2 = findLength(head2);
-  if(lengtHead1>lengtHead2){
-    let k = lengtHead1-lengtHead2 + 1;
-    while(--k){
+  if (lengtHead1 > lengtHead2) {
+    let k = lengtHead1 - lengtHead2 + 1;
+    while (--k) {
       head1 = head1.next
     }
   }
-  else{
-    let k = lengtHead2-lengtHead1;
-    while(--k){
+  else {
+    let k = lengtHead2 - lengtHead1;
+    while (--k) {
       head2 = head2.next
     }
   }
 
-  while(head1 && head2){
-    if(head1.val===head2.val){
+  while (head1 && head2) {
+    if (head1.val === head2.val) {
       return head1.val
     }
     head1 = head1.next;
@@ -267,27 +267,27 @@ function findMeetingPoint(head1, head2) {
 
 }
 
-function findPalindromeLL(head){
+function findPalindromeLL(head) {
 
-  let slow = head,fast = head;
+  let slow = head, fast = head;
   let curr = head;
 
-  while(fast!= null && fast.next!= null&& fast.next.next!= null){
+  while (fast != null && fast.next != null && fast.next.next != null) {
     fast = fast.next.next;
     slow = slow.next
   }
-  let reversed2Half= reverseLL(slow.next)
-  
+  let reversed2Half = reverseLL(slow.next)
 
-  while(reversed2Half){
-    if(reversed2Half.val!=curr.val){
+
+  while (reversed2Half) {
+    if (reversed2Half.val != curr.val) {
       return false;
     }
     curr = curr.next;
     reversed2Half = reversed2Half.next;
   }
   return true;
-  
+
 }
 
 let head4 = createSLL([9, 9, 9]);
@@ -319,6 +319,6 @@ let head8 = createSLL([1, 2, 3, 4, 5, 6, 7, 8]);
 // removeEl(curr)
 // traverseSLL(head8)
 
-let head11 = createSLL(['M','A','L','A','Y','B','L','A','M'])
+let head11 = createSLL(['M', 'A', 'L', 'A', 'Y', 'B', 'L', 'A', 'M'])
 
 console.log(findPalindromeLL(head11))
