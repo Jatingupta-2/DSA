@@ -95,8 +95,7 @@ var searchRange = function(nums, target) {
     
     while(lower<=upper){
         let middle = Math.floor((lower+upper)/2);
-        
-        console.log(middle)
+    
         if(nums[middle] === target){
             lowerLimit = middle
             upper = middle - 1;
